@@ -1,6 +1,5 @@
 function [RowAnchor,ColumnAnchor,NumAnchorsAvailable] = CheckForAvailableAnchors(Row,Column,Range)
 pa = parameter;
-SUNumber=pa.SUNumber;
 SizeOfGrid = pa.SizeOfGrid;
 global AnchorNodes;
 RowAnchor = zeros(1,SUNumber);
@@ -30,11 +29,11 @@ end
 [mAnchorList,nAnchorList]= size(AnchorNodes);
 NumAnchorsAvailable = 0;
 k=1;
-for i = 1: nAnchorList
+for i = 1: mAnchorList
     
     AnchorX = AnchorNodes{1,i}(1);
     AnchorY=AnchorNodes{1,i}(2);
-    %AnchorIndex=AnchorNodes{1,i}(3);
+    AnchorIndex=AnchorNodes{1,i}(3);
     if(AnchorX>=row_lower && AnchorX <= row_upper && AnchorY>=col_lower && AnchorY<= col_upper)
         RowAnchor(k) = AnchorX;
         ColumnAnchor(k) = AnchorY;
