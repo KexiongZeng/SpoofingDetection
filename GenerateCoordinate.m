@@ -1,9 +1,16 @@
-%GeneradeCoordinate
+%GenerateCoordinate
+function GenerateCoordinate
+global RealCoordinate;
+global FalseCoordinate;
+global SpoofedSUCount
+global SpoofedSUIndex;
+global AttackerLocation;
+global SpoofedLocation;
 pa=parameter;
 SUNumber=pa.SUNumber;
 SizeOfGrid=pa.SizeOfGrid;
 SpoofRange=pa.SpoofRange;
-Coordinate=cell(1,SUNumber);%Store coordinates for SUNumber SUs
+RealCoordinate=cell(1,SUNumber);%Store coordinates for SUNumber SUs
 AttackerLocation=[unidrnd(SizeOfGrid),unidrnd(SizeOfGrid)];%Attacker Location
 SpoofedLocation=[unidrnd(SizeOfGrid),unidrnd(SizeOfGrid)];%Spoofing Location set by attacker
 [ row_lower,row_upper,column_lower,column_upper ] = SetBoundary(AttackerLocation(1,1),AttackerLocation(1,2),SpoofRange);
@@ -13,7 +20,7 @@ SpoofedSUOriginalLocation=cell(1,SUNumber);%Store the original location of SUs s
 for i=1:SUNumber
     row=unidrnd(SizeOfGrid);
     column=unidrnd(SizeOfGrid);
-    Coordinate{1,i}=[row,column];
+    RealCoordinate{1,i}=[row,column];
         if((row>=row_lower)&&(row<=row_upper)&&(column>=column_lower)&&(column<=column_upper))
 
             SpoofedSUOriginalLocation{1,SpoofedSUCount}=[row,column];
@@ -23,12 +30,13 @@ for i=1:SUNumber
         end
 end
 
- FalseCoordinate=Coordinate;
+ FalseCoordinate=RealCoordinate;
  SpoofedSUCount=SpoofedSUCount-1;
+ SpoofedSUIndex=SpoofedSUIndex(1,1:SpoofedSUCount);
  for j=1:SpoofedSUCount
         FalseCoordinate{1,SpoofedSUIndex(1,j)}=SpoofedLocation;      
  end
  
-    save('RealCoordinate.mat','Coordinate');
-    save('FalseCoordinate.mat','FalseCoordinate');
-    save('SpoofedSUCount.mat','SpoofedSUCount');
+%     save('RealCoordinate.mat','Coordinate');
+%     save('FalseCoordinate.mat','FalseCoordinate');
+%     save('SpoofInfo.mat','SpoofedSUCount','SpoofedSUIndex');

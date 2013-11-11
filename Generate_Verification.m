@@ -57,7 +57,7 @@ while(NumChecked >LastNumChecked)%If no more nodes can be verified
             Error_est = (XEst-SUCoordinates(1,1)).^2 + (YEst-SUCoordinates(1,2)).^2; %wrong   you need to sqrt
             
                 if(Error_est <= ErrorTolerance)
-                NewAnchorAvailable{index,1} = [XEst,YEst,i];% Using estimate location as new anchor location is wrong. Estimation locations are not real topologies, we need to check for available anchors from real topology graph
+                NewAnchorAvailable{index,1} = [XEst,YEst,i];% Using estimate location as new anchor location is wrong. Estimation locations are not real topologies, we need to check for available anchors from real topology graph.
                 index = index + 1;
                 NumChecked = NumChecked + 1;
                 display('We got a new anchor!');

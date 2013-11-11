@@ -3,6 +3,7 @@ pa = parameter;
 SUNumber=pa.SUNumber;
 SizeOfGrid = pa.SizeOfGrid;
 global AnchorNodes;
+global SuspiciousFlag;
 RowAnchor = zeros(1,SUNumber);
 ColumnAnchor = zeros(1,SUNumber);
 
@@ -34,8 +35,8 @@ for i = 1: nAnchorList
     
     AnchorX = AnchorNodes{1,i}(1);
     AnchorY=AnchorNodes{1,i}(2);
-    %AnchorIndex=AnchorNodes{1,i}(3);
-    if(AnchorX>=row_lower && AnchorX <= row_upper && AnchorY>=col_lower && AnchorY<= col_upper)
+    AnchorInd=AnchorNodes{1,i}(3);
+    if(AnchorX>=row_lower && AnchorX <= row_upper && AnchorY>=col_lower && AnchorY<= col_upper&&SuspiciousFlag(1,AnchorInd)~=1)
         RowAnchor(k) = AnchorX;
         ColumnAnchor(k) = AnchorY;
         NumAnchorsAvailable = NumAnchorsAvailable + 1;
